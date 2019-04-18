@@ -1,0 +1,12 @@
+{
+  "name": "rp-back-end",
+  "version": "0.0.1",
+  "main": "app.ts",
+  "repository": "git@github.com:AdenFlorian/rp-back-end.git",
+  "author": "David Valachovic <David.E.Valachovic@gmail.com>",
+  "license": "UNLICENSED",
+  "private": false,
+  "scripts": {
+    "start": ""
+  }
+}
