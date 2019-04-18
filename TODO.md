@@ -1,6 +1,8 @@
 TODO
 ====
 
+- [√] hello world
+- [ ] hello world test
 - [ ] DeckOfCards class
     - methods:
         - [ ] shuffle
