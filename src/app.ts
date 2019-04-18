@@ -1,1 +1,3 @@
-console.log('hello R&P!')
+export const sayHello = () => 'hello R&P!'
+
+console.log(sayHello())
