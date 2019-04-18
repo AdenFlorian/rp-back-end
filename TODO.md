@@ -7,7 +7,7 @@ TODO
     - methods:
         - [√] shuffle
         - [√] deal one card
-- [ ] usage instructions (README?)
+- [√] usage instructions (README?)
 - [√] automated tests
 
 ## Notes
