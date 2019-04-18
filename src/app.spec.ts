@@ -1,7 +1,8 @@
 import {expect} from 'chai'
 import {getHello, DeckOfCards, Card, Suit, Rank} from './app';
+import {List} from 'immutable';
 
-const defaultCards: Readonly<Card[]> = [
+const defaultCards = List<Card>([
     {suit: Suit.Clubs, rank: Rank.Ace},
     {suit: Suit.Clubs, rank: Rank.Two},
     {suit: Suit.Clubs, rank: Rank.Three},
@@ -54,7 +55,7 @@ const defaultCards: Readonly<Card[]> = [
     {suit: Suit.Spades, rank: Rank.Jack},
     {suit: Suit.Spades, rank: Rank.Queen},
     {suit: Suit.Spades, rank: Rank.King},
-]
+])
 
 describe('getHello', () => {
     it('should return hello', () => {
@@ -68,7 +69,7 @@ describe('DeckOfCards', () => {
             const newDeck = new DeckOfCards()
 
             expect(newDeck.getCards().count()).to.equal(52)
-            expect(newDeck.getCards().toJS()).to.deep.equal(defaultCards)
+            expect(newDeck.getCards().toJS()).to.deep.equal(defaultCards.toJS())
         })
     })
     describe('shuffle', () => {
@@ -79,14 +80,36 @@ describe('DeckOfCards', () => {
 
             const shuffledCards = deck.getCards().toJS()
 
-            expect(shuffledCards).to.not.deep.equal(defaultCards)
+            expect(shuffledCards).to.not.deep.equal(defaultCards.toJS())
 
             deck.shuffle()
 
             const shuffledCards2 = deck.getCards().toJS()
 
-            expect(shuffledCards2).to.not.deep.equal(defaultCards)
+            expect(shuffledCards2).to.not.deep.equal(defaultCards.toJS())
             expect(shuffledCards2).to.not.deep.equal(shuffledCards)
+        })
+    })
+    describe('dealOneCard', () => {
+        it('should remove card from top of deck and return it', () => {
+            const deck = new DeckOfCards()
+
+            const dealtCard = deck.dealOneCard()
+
+            expect(dealtCard).to.deep.equal(defaultCards.last())
+            expect(deck.getCards().count()).to.equal(51)
+        })
+        it('should return null if no cards', () => {
+            const deck = new DeckOfCards()
+
+            for (let i = 0; i <= 53; i++) {
+                deck.dealOneCard()
+            }
+
+            const dealtCard = deck.dealOneCard()
+
+            expect(dealtCard).to.be.null
+            expect(deck.getCards().count()).to.equal(0)
         })
     })
 })

@@ -1,4 +1,4 @@
-import {OrderedSet} from 'immutable'
+import {List} from 'immutable'
 
 export const getHello = () => 'hello R&P!'
 
@@ -30,7 +30,7 @@ export interface Card {
     rank: Rank
 }
 
-export type Cards = OrderedSet<Card>
+export type Cards = List<Card>
 
 export class DeckOfCards {
     private _cards: Cards = createCards()
@@ -52,7 +52,13 @@ export class DeckOfCards {
             originalCards = originalCards.filter(x => x !== valueToMove)
         }
 
-        this._cards = OrderedSet<Card>(shuffledCards)
+        this._cards = List<Card>(shuffledCards)
+    }
+
+    public dealOneCard(): Card | null {
+        const cardToDeal = this._cards.last(null)
+        this._cards = this._cards.pop()
+        return cardToDeal
     }
 }
 
@@ -70,7 +76,7 @@ function createCards(): Cards {
         })
     })
 
-    return OrderedSet<Card>(deck)
+    return List<Card>(deck)
 }
 
 function randomRange(min: number, max: number): number {
