@@ -3,12 +3,12 @@ TODO
 
 - [√] hello world
 - [√] hello world test
-- [...] DeckOfCards class
+- [√] DeckOfCards class
     - methods:
-        - [ ] shuffle
-        - [ ] deal one card
+        - [√] shuffle
+        - [√] deal one card
 - [ ] usage instructions (README?)
-- [ ] automated tests
+- [√] automated tests
 
 ## Notes
 - nicely modeled data
