@@ -74,7 +74,7 @@ describe('DeckOfCards', () => {
         })
     })
     describe('shuffle', () => {
-        it('should put the cards in a different order than before', () => {
+        it('should put the cards in a different order than before each time', () => {
             const deck = new DeckOfCards()
 
             deck.shuffle()
@@ -83,16 +83,28 @@ describe('DeckOfCards', () => {
 
             expect(shuffledCards).to.not.deep.equal(defaultCards.toJS())
 
-            shuffledCards.forEach(card => {
-                expect(card).to.not.be.undefined
-            })
-
             deck.shuffle()
 
             const shuffledCards2 = deck.getCards().toJS()
 
             expect(shuffledCards2).to.not.deep.equal(defaultCards.toJS())
             expect(shuffledCards2).to.not.deep.equal(shuffledCards)
+        })
+        it('should keep deck as same length', () => {
+            const deck = new DeckOfCards()
+
+            deck.shuffle()
+
+            expect(deck.getCards().count()).to.equal(52)
+        })
+        it('should only have cards in it', () => {
+            const deck = new DeckOfCards()
+
+            deck.shuffle()
+
+            deck.getCards().forEach(card => {
+                expect(card).to.not.be.undefined
+            })
         })
     })
     describe('dealOneCard', () => {
