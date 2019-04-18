@@ -1,6 +1,7 @@
 import {expect} from 'chai'
-import {getHello, DeckOfCards, Card, Suit, Rank} from './app';
-import {List} from 'immutable';
+import {DeckOfCards, Card, Suit, Rank} from './card-types'
+import {List} from 'immutable'
+import {getHello} from './hello'
 
 const defaultCards = List<Card>([
     {suit: Suit.Clubs, rank: Rank.Ace},
@@ -81,6 +82,10 @@ describe('DeckOfCards', () => {
             const shuffledCards = deck.getCards().toJS()
 
             expect(shuffledCards).to.not.deep.equal(defaultCards.toJS())
+
+            // shuffledCards.forEach(card => {
+            //     expect(card).to.not.be.undefined
+            // })
 
             deck.shuffle()
 
