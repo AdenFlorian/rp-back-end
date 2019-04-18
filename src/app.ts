@@ -1,13 +1,15 @@
-export const sayHello = () => 'hello R&P!'
+import {OrderedSet} from 'immutable'
 
-enum Suit {
+export const getHello = () => 'hello R&P!'
+
+export enum Suit {
     Clubs = 'Clubs',
     Diamonds = 'Diamonds',
     Hearts = 'Hearts',
     Spades = 'Spades',
 }
 
-enum Rank {
+export enum Rank {
     Ace = 'Ace',
     Two = 'Two',
     Three = 'Three',
@@ -23,27 +25,40 @@ enum Rank {
     King = 'King',
 }
 
-interface Card {
+export interface Card {
     suit: Suit
     rank: Rank
 }
 
+export type Cards = OrderedSet<Card>
+
 export class DeckOfCards {
-    public readonly _cards: Readonly<Card[]> = createCards()
+    private _cards: Cards = createCards()
+
+    public getCards(): Cards {
+        return this._cards
+    }
 
     public shuffle() {
+        let originalCards = this._cards.toJS()
+        const shuffledCards = []
 
+        const cardCount = originalCards.length
+
+        for (let i = 0; i < cardCount; i++) {
+            const randomIndex = randomRange(0, originalCards.length)
+            const valueToMove = originalCards[randomIndex]
+            shuffledCards.push(valueToMove)
+            originalCards = originalCards.filter(x => x !== valueToMove)
+        }
+
+        this._cards = OrderedSet<Card>(shuffledCards)
     }
 }
 
-console.log(sayHello())
+console.log(getHello())
 
-const myDeck = new DeckOfCards()
-
-console.log(myDeck._cards)
-console.log(myDeck._cards.length)
-
-function createCards(): Readonly<Card[]> {
+function createCards(): Cards {
     const deck = new Array<Card>()
 
     Object.keys(Suit).forEach(suit => {
@@ -55,5 +70,9 @@ function createCards(): Readonly<Card[]> {
         })
     })
 
-    return Object.freeze(deck)
+    return OrderedSet<Card>(deck)
+}
+
+function randomRange(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min
 }
