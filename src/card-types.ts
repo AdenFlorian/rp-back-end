@@ -44,7 +44,7 @@ export class DeckOfCards {
         const cardCount = originalCards.length
 
         for (let i = 0; i < cardCount; i++) {
-            const randomIndex = randomRange(0, originalCards.length)
+            const randomIndex = randomRange(0, originalCards.length - 1)
             const valueToMove = originalCards[randomIndex]
             shuffledCards.push(valueToMove)
             originalCards = originalCards.filter(x => x !== valueToMove)

@@ -83,9 +83,9 @@ describe('DeckOfCards', () => {
 
             expect(shuffledCards).to.not.deep.equal(defaultCards.toJS())
 
-            // shuffledCards.forEach(card => {
-            //     expect(card).to.not.be.undefined
-            // })
+            shuffledCards.forEach(card => {
+                expect(card).to.not.be.undefined
+            })
 
             deck.shuffle()
 
