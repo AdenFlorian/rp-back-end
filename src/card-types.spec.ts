@@ -1,7 +1,6 @@
 import {expect} from 'chai'
 import {DeckOfCards, Card, Suit, Rank} from './card-types'
 import {List} from 'immutable'
-import {getHello} from './hello'
 
 const defaultCards = List<Card>([
     {suit: Suit.Clubs, rank: Rank.Ace},
@@ -57,12 +56,6 @@ const defaultCards = List<Card>([
     {suit: Suit.Spades, rank: Rank.Queen},
     {suit: Suit.Spades, rank: Rank.King},
 ])
-
-describe('getHello', () => {
-    it('should return hello', () => {
-        expect(getHello()).to.equal('hello R&P!')
-    })
-})
 
 describe('DeckOfCards', () => {
     describe('constructor', () => {
